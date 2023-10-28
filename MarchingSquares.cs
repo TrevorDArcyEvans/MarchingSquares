@@ -74,7 +74,7 @@ static class MarchingSquares {
         }
     }
 
-    // Get the base16 state of a cell based on the binary values given
+    // Get the base 10 state of a cell based on the binary values given
     private static int GetState(double A, double B, double C, double D) {
         return (int)(A * 8 + B * 4 + C * 2 + D * 1);
     }

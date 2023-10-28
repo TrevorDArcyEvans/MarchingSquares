@@ -8,7 +8,7 @@ class Program {
     static void Main(string[] args) {
         var RNG = new RNG();
 
-        var CellSize = 20;
+        var CellSize = 40;
         var WindowSize = new Vector2(1200, 800);
         var MaxPoints = new Vector2(WindowSize.X / CellSize + 1, WindowSize.Y / CellSize + 1);
 
