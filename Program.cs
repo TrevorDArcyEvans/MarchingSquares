@@ -24,6 +24,9 @@ class Program {
         SetTargetFPS(60);
 
         while (!WindowShouldClose()) {
+            // Get Line Segments
+            var LineSegments = MarchingSquares.Run(Points, CellSize, 0, 0, (int)MaxPoints.X, (int)MaxPoints.Y);
+
             BeginDrawing();
             ClearBackground(Color.BLACK);
 
@@ -32,8 +35,10 @@ class Program {
                 Point.Draw();
             }
 
-            // Draw Marching Squares
-            MarchingSquares.Run(Points, CellSize, 0, 0, (int)MaxPoints.X, (int)MaxPoints.Y);
+            // Draw Line Segments
+            foreach (var Line in LineSegments) {
+                DrawLineEx(Line.Item1 * CellSize, Line.Item2 * CellSize, 1.0f, Color.WHITE);
+            }
 
             EndDrawing();
         }

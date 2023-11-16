@@ -5,9 +5,10 @@ using static Raylib_cs.Raylib;
 namespace MarchingSquares;
 
 static class MarchingSquares {
-
     // Run the marching squares algorithm on the given list
-    public static void Run(Point[,] Points, int S, int X1, int Y1, int X2, int Y2) {
+    public static List<Tuple<Vector2, Vector2>> Run(Point[,] Points, int S, int X1, int Y1, int X2, int Y2) {
+        var LineSegments = new List<Tuple<Vector2, Vector2>>();
+
         for (int x = X1; x < X2 - 1; x++) {
             for (int y = Y1; y < Y2 - 1; y++) {
                 var A = new Vector2(x + 0.5f, y);
@@ -24,64 +25,61 @@ static class MarchingSquares {
 
                 switch (State) {
                     case 1:
-                        DrawLine(D, C, S);
+                        LineSegments.Add(new Tuple<Vector2, Vector2>(D, C));
                         break;
                     case 2:
-                        DrawLine(C, B, S);
+                        LineSegments.Add(new Tuple<Vector2, Vector2>(C, B));
                         break;
                     case 3:
-                        DrawLine(D, B, S);
+                        LineSegments.Add(new Tuple<Vector2, Vector2>(D, B));
                         break;
                     case 4:
-                        DrawLine(A, B, S);
+                        LineSegments.Add(new Tuple<Vector2, Vector2>(B, A));
                         break;
                     case 5:
-                        DrawLine(D, A, S);
-                        DrawLine(C, B, S);
+                        LineSegments.Add(new Tuple<Vector2, Vector2>(D, A));
+                        LineSegments.Add(new Tuple<Vector2, Vector2>(C, B));
                         break;
                     case 6:
-                        DrawLine(A, C, S);
+                        LineSegments.Add(new Tuple<Vector2, Vector2>(C, A));
                         break;
                     case 7:
-                        DrawLine(D, A, S);
+                        LineSegments.Add(new Tuple<Vector2, Vector2>(D, A));
                         break;
                     case 8:
-                        DrawLine(D, A, S);
+                        LineSegments.Add(new Tuple<Vector2, Vector2>(A, D));
                         break;
                     case 9:
-                        DrawLine(C, A, S);
+                        LineSegments.Add(new Tuple<Vector2, Vector2>(A, C));
                         break;
                     case 10:
-                        DrawLine(D, C, S);
-                        DrawLine(A, B, S);
+                        LineSegments.Add(new Tuple<Vector2, Vector2>(D, C));
+                        LineSegments.Add(new Tuple<Vector2, Vector2>(A, B));
                         break;
                     case 11:
-                        DrawLine(A, B, S);
+                        LineSegments.Add(new Tuple<Vector2, Vector2>(A, B));
                         break;
                     case 12:
-                        DrawLine(D, B, S);
+                        LineSegments.Add(new Tuple<Vector2, Vector2>(B, D));
                         break;
                     case 13:
-                        DrawLine(C, B, S);
+                        LineSegments.Add(new Tuple<Vector2, Vector2>(B, C));
                         break;
                     case 14:
-                        DrawLine(D, C, S);
+                        LineSegments.Add(new Tuple<Vector2, Vector2>(C, D));
                         break;
                     case 15:
                         break;
                 }
             }
         }
+
+        return LineSegments;
     }
 
     // Get the base 10 state of a cell based on the binary values given
-    private static int GetState(double A, double B, double C, double D) {
-        return (int)(A * 8 + B * 4 + C * 2 + D * 1);
-    }
-
-    // Draw a line from A to B in a specified color, or white (default)
-    private static void DrawLine(Vector2 A, Vector2 B, int S, Color? C=null) {
-        var Col = C ?? Color.WHITE;
-        DrawLineEx(A * S, B * S, 2.0f, Col);
+    private static int GetState(int A, int B, int C, int D) {
+        var Binary = $"{A}{B}{C}{D}";
+        return Convert.ToInt32(Binary, 2);
     }
 }
