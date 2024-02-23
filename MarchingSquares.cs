@@ -6,7 +6,7 @@ namespace MarchingSquares;
 
 static class MarchingSquares {
     // Run the marching squares algorithm on the given list
-    public static List<Tuple<Vector2, Vector2>> Run(Point[,] Points, int S, int X1, int Y1, int X2, int Y2) {
+    public static List<Tuple<Vector2, Vector2>> Run(Point[,] Points, int X1, int Y1, int X2, int Y2) {
         var LineSegments = new List<Tuple<Vector2, Vector2>>();
 
         for (int x = X1; x < X2 - 1; x++) {
