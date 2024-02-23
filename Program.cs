@@ -25,7 +25,7 @@ class Program {
 
         while (!WindowShouldClose()) {
             // Get Line Segments
-            var LineSegments = MarchingSquares.Run(Points, CellSize, 0, 0, (int)MaxPoints.X, (int)MaxPoints.Y);
+            var LineSegments = MarchingSquares.Run(Points, 0, 0, (int)MaxPoints.X, (int)MaxPoints.Y);
 
             BeginDrawing();
             ClearBackground(Color.BLACK);
