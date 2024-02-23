@@ -1,6 +1,8 @@
 # MarchingSquares
 This is a simple implementation of the marching squares algorithm in C# using Raylib-cs for graphics.
 
+The file `RNG.cs` is from another project of mine, [Calcium](https://github.com/leftbones/calcium).
+
 Example:
 ![Marching squares output example](example.png)
 
