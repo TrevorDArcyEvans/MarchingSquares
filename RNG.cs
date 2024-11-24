@@ -1,11 +1,11 @@
 namespace MarchingSquares;
 
-public class RNG
+public class Rng
 {
   public Random Random { get; private set; }
   public int Seed { get; private set; }
 
-  public RNG(int? seed = null)
+  public Rng(int? seed = null)
   {
     Seed = seed ?? Environment.TickCount;
     Random = new Random(Seed);

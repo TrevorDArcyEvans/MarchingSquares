@@ -1,30 +1,30 @@
+namespace MarchingSquares;
+
 using System.Numerics;
 using Raylib_cs;
 using static Raylib_cs.Raylib;
 
-namespace MarchingSquares;
-
-static class MarchingSquares
+internal static class MarchingSquares
 {
   // Run the marching squares algorithm on the given list
   public static List<Tuple<Vector2, Vector2>> Run(Point[,] Points, int X1, int Y1, int X2, int Y2)
   {
     var LineSegments = new List<Tuple<Vector2, Vector2>>();
 
-    for (int x = X1; x < X2 - 1; x++)
+    for (var X = X1; X < X2 - 1; X++)
     {
-      for (int y = Y1; y < Y2 - 1; y++)
+      for (var Y = Y1; Y < Y2 - 1; Y++)
       {
-        var A = new Vector2(x + 0.5f, y);
-        var B = new Vector2(x + 1, y + 0.5f);
-        var C = new Vector2(x + 0.5f, y + 1);
-        var D = new Vector2(x, y + 0.5f);
+        var A = new Vector2(X + 0.5f, Y);
+        var B = new Vector2(X + 1, Y + 0.5f);
+        var C = new Vector2(X + 0.5f, Y + 1);
+        var D = new Vector2(X, Y + 0.5f);
 
         var State = GetState(
-          Points[x, y].Value,
-          Points[x + 1, y].Value,
-          Points[x + 1, y + 1].Value,
-          Points[x, y + 1].Value
+          Points[X, Y].Value,
+          Points[X + 1, Y].Value,
+          Points[X + 1, Y + 1].Value,
+          Points[X, Y + 1].Value
         );
 
         switch (State)

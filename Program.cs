@@ -1,26 +1,26 @@
-﻿using System.Numerics;
+﻿namespace MarchingSquares;
+
+using System.Numerics;
 using Raylib_cs;
 using static Raylib_cs.Raylib;
 
-namespace MarchingSquares;
-
-class Program
+public static class Program
 {
-  static void Main(string[] args)
+  public static void Main(string[] args)
   {
-    var RNG = new RNG();
+    var Rng = new Rng();
 
-    var CellSize = 40;
+    const int CellSize = 40;
     var WindowSize = new Vector2(1200, 800);
     var MaxPoints = new Vector2(WindowSize.X / CellSize + 1, WindowSize.Y / CellSize + 1);
 
     var Points = new Point[(int) MaxPoints.X, (int) MaxPoints.Y];
-    for (int x = 0; x < MaxPoints.X; x++)
+    for (var X = 0; X < MaxPoints.X; X++)
     {
-      for (int y = 0; y < MaxPoints.Y; y++)
+      for (var Y = 0; Y < MaxPoints.Y; Y++)
       {
-        var Value = RNG.CoinFlip() ? 1 : 0;
-        Points[x, y] = new Point(x * CellSize, y * CellSize, Value);
+        var Value = Rng.CoinFlip() ? 1 : 0;
+        Points[X, Y] = new Point(X * CellSize, Y * CellSize, Value);
       }
     }
 
