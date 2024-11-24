@@ -14,12 +14,12 @@ public static class Program
     var WindowSize = new Vector2(1200, 800);
     var MaxPoints = new Vector2(WindowSize.X / CellSize + 1, WindowSize.Y / CellSize + 1);
 
-    var Points = new Point[(int) MaxPoints.X, (int) MaxPoints.Y];
+    var Points = new PointValue[(int) MaxPoints.X, (int) MaxPoints.Y];
     for (var X = 0; X < MaxPoints.X; X++)
     {
       for (var Y = 0; Y < MaxPoints.Y; Y++)
       {
-        Points[X, Y] = new Point(X * CellSize, Y * CellSize, Rng.CoinFlip());
+        Points[X, Y] = new PointValue(X * CellSize, Y * CellSize, Rng.CoinFlip());
       }
     }
 
