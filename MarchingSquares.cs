@@ -27,8 +27,11 @@ internal static class MarchingSquares
           Points[X, Y + 1].Value
         );
 
+        // https://en.wikipedia.org/wiki/Marching_squares
         switch (State)
         {
+          case 0:
+            break;
           case 1:
             LineSegments.Add(new Tuple<Vector2, Vector2>(D, C));
             break;
@@ -75,6 +78,8 @@ internal static class MarchingSquares
             break;
           case 15:
             break;
+          default:
+            throw new ArgumentOutOfRangeException();
         }
       }
     }
