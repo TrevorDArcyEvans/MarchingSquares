@@ -1,8 +1,6 @@
 namespace MarchingSquares;
 
 using System.Numerics;
-using Raylib_cs;
-using static Raylib_cs.Raylib;
 
 internal static class MarchingSquares
 {
