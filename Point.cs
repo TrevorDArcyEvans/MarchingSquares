@@ -16,7 +16,7 @@ class Point {
     }
 
     public void Draw() {
-        var C = Value > 0 ? Color.WHITE : Color.DARKGRAY;
+        var C = Value > 0 ? Color.White : Color.DarkGray;
         DrawCircleLines(X, Y, 1.0f, C);
     }
 }

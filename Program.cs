@@ -28,7 +28,7 @@ class Program {
             var LineSegments = MarchingSquares.Run(Points, 0, 0, (int)MaxPoints.X, (int)MaxPoints.Y);
 
             BeginDrawing();
-            ClearBackground(Color.BLACK);
+            ClearBackground(Color.Black);
 
             // Draw Points
             foreach (var Point in Points) {
@@ -37,7 +37,7 @@ class Program {
 
             // Draw Line Segments
             foreach (var Line in LineSegments) {
-                DrawLineEx(Line.Item1 * CellSize, Line.Item2 * CellSize, 1.0f, Color.WHITE);
+                DrawLineEx(Line.Item1 * CellSize, Line.Item2 * CellSize, 1.0f, Color.White);
             }
 
             EndDrawing();
