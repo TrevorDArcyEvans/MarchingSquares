@@ -1,8 +1,5 @@
 namespace MarchingSquares;
 
-using Raylib_cs;
-using static Raylib_cs.Raylib;
-
 public class Point
 {
   public int X { get; set; }
@@ -14,11 +11,5 @@ public class Point
     X = x;
     Y = y;
     Value = value;
-  }
-
-  public void Draw()
-  {
-    var C = Value > 0 ? Color.White : Color.DarkGray;
-    DrawCircleLines(X, Y, 1.0f, C);
   }
 }
