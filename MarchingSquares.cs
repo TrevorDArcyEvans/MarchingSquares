@@ -88,7 +88,6 @@ internal static class MarchingSquares
   // Get the base 10 state of a cell based on the binary values given
   private static int GetState(bool A, bool B, bool C, bool D)
   {
-    var Binary = $"{Convert.ToInt32(A)}{Convert.ToInt32(B)}{Convert.ToInt32(C)}{Convert.ToInt32(D)}";
-    return Convert.ToInt32(Binary, 2);
+    return Convert.ToInt32(A) * 8 + Convert.ToInt32(B) * 4 + Convert.ToInt32(C) * 2 + Convert.ToInt32(D);
   }
 }
