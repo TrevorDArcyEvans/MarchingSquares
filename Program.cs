@@ -19,8 +19,7 @@ public static class Program
     {
       for (var Y = 0; Y < MaxPoints.Y; Y++)
       {
-        var Value = Rng.CoinFlip() ? 1 : 0;
-        Points[X, Y] = new Point(X * CellSize, Y * CellSize, Value);
+        Points[X, Y] = new Point(X * CellSize, Y * CellSize, Rng.CoinFlip());
       }
     }
 
