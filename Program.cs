@@ -8,18 +8,18 @@ public static class Program
 {
   public static void Main(string[] args)
   {
-    var Rng = new Rng();
+    var rng = new Rng();
 
     const int CellSize = 40;
     var WindowSize = new Vector2(1200, 800);
-    var MaxPoints = new Vector2(WindowSize.X / CellSize + 1, WindowSize.Y / CellSize + 1);
+    var maxPoints = new Vector2(WindowSize.X / CellSize + 1, WindowSize.Y / CellSize + 1);
 
-    var Points = new Point[(int) MaxPoints.X, (int) MaxPoints.Y];
-    for (var X = 0; X < MaxPoints.X; X++)
+    var points = new Point[(int) maxPoints.X, (int) maxPoints.Y];
+    for (var x = 0; x < maxPoints.X; x++)
     {
-      for (var Y = 0; Y < MaxPoints.Y; Y++)
+      for (var y = 0; y < maxPoints.Y; y++)
       {
-        Points[X, Y] = new Point(X * CellSize, Y * CellSize, Rng.CoinFlip());
+        points[x, y] = new Point(x * CellSize, y * CellSize, rng.CoinFlip());
       }
     }
 
@@ -29,21 +29,21 @@ public static class Program
     while (!WindowShouldClose())
     {
       // Get Line Segments
-      var LineSegments = MarchingSquares.Run(Points);
+      var lineSegments = MarchingSquares.Run(points);
 
       BeginDrawing();
       ClearBackground(Color.Black);
 
       // Draw Points
-      foreach (var Point in Points)
+      foreach (var point in points)
       {
-        Point.Draw();
+        point.Draw();
       }
 
       // Draw Line Segments
-      foreach (var Line in LineSegments)
+      foreach (var line in lineSegments)
       {
-        DrawLineEx(Line.Item1 * CellSize, Line.Item2 * CellSize, 1.0f, Color.White);
+        DrawLineEx(line.Item1 * CellSize, line.Item2 * CellSize, 1.0f, Color.White);
       }
 
       EndDrawing();

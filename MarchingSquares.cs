@@ -5,89 +5,89 @@ using System.Numerics;
 internal static class MarchingSquares
 {
   // Run the marching squares algorithm on the given list
-  public static List<Tuple<Vector2, Vector2>> Run(Point[,] Points)
+  public static List<Tuple<Vector2, Vector2>> Run(Point[,] points)
   {
-    var LineSegments = new List<Tuple<Vector2, Vector2>>();
+    var lineSegments = new List<Tuple<Vector2, Vector2>>();
 
-    for (var X = 0; X < Points.GetLength(0) - 1; X++)
+    for (var x = 0; x < points.GetLength(0) - 1; x++)
     {
-      for (var Y = 0; Y < Points.GetLength(1) - 1; Y++)
+      for (var y = 0; y < points.GetLength(1) - 1; y++)
       {
-        var A = new Vector2(X + 0.5f, Y);
-        var B = new Vector2(X + 1, Y + 0.5f);
-        var C = new Vector2(X + 0.5f, Y + 1);
-        var D = new Vector2(X, Y + 0.5f);
+        var a = new Vector2(x + 0.5f, y);
+        var b = new Vector2(x + 1, y + 0.5f);
+        var c = new Vector2(x + 0.5f, y + 1);
+        var d = new Vector2(x, y + 0.5f);
 
-        var State = GetState(
-          Points[X, Y].Value,
-          Points[X + 1, Y].Value,
-          Points[X + 1, Y + 1].Value,
-          Points[X, Y + 1].Value
+        var state = GetState(
+          points[x, y].Value,
+          points[x + 1, y].Value,
+          points[x + 1, y + 1].Value,
+          points[x, y + 1].Value
         );
 
         // https://en.wikipedia.org/wiki/Marching_squares
-        switch (State)
+        switch (state)
         {
           case 0:
             break;
           case 1:
-            LineSegments.Add(new Tuple<Vector2, Vector2>(D, C));
+            lineSegments.Add(new Tuple<Vector2, Vector2>(d, c));
             break;
           case 2:
-            LineSegments.Add(new Tuple<Vector2, Vector2>(C, B));
+            lineSegments.Add(new Tuple<Vector2, Vector2>(c, b));
             break;
           case 3:
-            LineSegments.Add(new Tuple<Vector2, Vector2>(D, B));
+            lineSegments.Add(new Tuple<Vector2, Vector2>(d, b));
             break;
           case 4:
-            LineSegments.Add(new Tuple<Vector2, Vector2>(B, A));
+            lineSegments.Add(new Tuple<Vector2, Vector2>(b, a));
             break;
           case 5:
-            LineSegments.Add(new Tuple<Vector2, Vector2>(D, A));
-            LineSegments.Add(new Tuple<Vector2, Vector2>(C, B));
+            lineSegments.Add(new Tuple<Vector2, Vector2>(d, a));
+            lineSegments.Add(new Tuple<Vector2, Vector2>(c, b));
             break;
           case 6:
-            LineSegments.Add(new Tuple<Vector2, Vector2>(C, A));
+            lineSegments.Add(new Tuple<Vector2, Vector2>(c, a));
             break;
           case 7:
-            LineSegments.Add(new Tuple<Vector2, Vector2>(D, A));
+            lineSegments.Add(new Tuple<Vector2, Vector2>(d, a));
             break;
           case 8:
-            LineSegments.Add(new Tuple<Vector2, Vector2>(A, D));
+            lineSegments.Add(new Tuple<Vector2, Vector2>(a, d));
             break;
           case 9:
-            LineSegments.Add(new Tuple<Vector2, Vector2>(A, C));
+            lineSegments.Add(new Tuple<Vector2, Vector2>(a, c));
             break;
           case 10:
-            LineSegments.Add(new Tuple<Vector2, Vector2>(D, C));
-            LineSegments.Add(new Tuple<Vector2, Vector2>(A, B));
+            lineSegments.Add(new Tuple<Vector2, Vector2>(d, c));
+            lineSegments.Add(new Tuple<Vector2, Vector2>(a, b));
             break;
           case 11:
-            LineSegments.Add(new Tuple<Vector2, Vector2>(A, B));
+            lineSegments.Add(new Tuple<Vector2, Vector2>(a, b));
             break;
           case 12:
-            LineSegments.Add(new Tuple<Vector2, Vector2>(B, D));
+            lineSegments.Add(new Tuple<Vector2, Vector2>(b, d));
             break;
           case 13:
-            LineSegments.Add(new Tuple<Vector2, Vector2>(B, C));
+            lineSegments.Add(new Tuple<Vector2, Vector2>(b, c));
             break;
           case 14:
-            LineSegments.Add(new Tuple<Vector2, Vector2>(C, D));
+            lineSegments.Add(new Tuple<Vector2, Vector2>(c, d));
             break;
           case 15:
             break;
           default:
-            throw new ArgumentOutOfRangeException();
+            throw new ArgumentOutOfRangeException($"State {state} is not supported");
         }
       }
     }
 
-    return LineSegments;
+    return lineSegments;
   }
 
   // Get the base 10 state of a cell based on the binary values given
-  private static int GetState(bool A, bool B, bool C, bool D)
+  private static int GetState(bool a, bool b, bool c, bool d)
   {
-    return Convert.ToInt32(A) * 8 + Convert.ToInt32(B) * 4 + Convert.ToInt32(C) * 2 + Convert.ToInt32(D);
+    return Convert.ToInt32(a) * 8 + Convert.ToInt32(b) * 4 + Convert.ToInt32(c) * 2 + Convert.ToInt32(d);
   }
 }
