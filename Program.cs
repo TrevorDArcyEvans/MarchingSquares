@@ -29,7 +29,7 @@ public static class Program
     while (!WindowShouldClose())
     {
       // Get Line Segments
-      var LineSegments = MarchingSquares.Run(Points, 0, 0, (int) MaxPoints.X, (int) MaxPoints.Y);
+      var LineSegments = MarchingSquares.Run(Points);
 
       BeginDrawing();
       ClearBackground(Color.Black);
