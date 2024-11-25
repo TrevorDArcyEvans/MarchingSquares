@@ -12,7 +12,6 @@ public static class Program
 
     const int CellSize = 40;
     var WindowSize = new Vector2(1200, 800);
-    var maxPoints = new Vector2(WindowSize.X / CellSize + 1, WindowSize.Y / CellSize + 1);
 
     var points = new Point[(int) (WindowSize.X / CellSize + 1), (int) (WindowSize.Y / CellSize + 1)];
     for (var x = 0; x < points.GetLength(0); x++)
