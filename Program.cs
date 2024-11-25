@@ -1,6 +1,6 @@
 ﻿namespace MarchingSquares;
 
-using System.Numerics;
+using MathNet.Numerics.LinearAlgebra;
 using Raylib_cs;
 using static Raylib_cs.Raylib;
 
@@ -14,10 +14,10 @@ public static class Program
     var WindowSize = new Vector2(1200, 800);
     var MaxPoints = new Vector2(WindowSize.X / CellSize + 1, WindowSize.Y / CellSize + 1);
 
-    var Points = new PointValue[(int) MaxPoints.X, (int) MaxPoints.Y];
-    for (var X = 0; X < MaxPoints.X; X++)
+    var Points = Matrix<PointValue>.Build.Dense((int) (WindowSize.X / CellSize) + 1, (int) (WindowSize.Y / CellSize) + 1);
+    for (var X = 0; X < Points.RowCount; X++)
     {
-      for (var Y = 0; Y < MaxPoints.Y; Y++)
+      for (var Y = 0; Y < Points.ColumnCount; Y++)
       {
         Points[X, Y] = new PointValue(X * CellSize, Y * CellSize, Rng.CoinFlip());
       }
@@ -29,21 +29,28 @@ public static class Program
     while (!WindowShouldClose())
     {
       // Get Line Segments
-      var LineSegments = MarchingSquares.Run(Points, 0, 0, (int) MaxPoints.X, (int) MaxPoints.Y);
+      var LineSegments = MarchingSquares.Run(Points);
 
       BeginDrawing();
       ClearBackground(Color.Black);
 
       // Draw Points
-      foreach (var Point in Points)
+      for (var X = 0; X < Points.RowCount; X++)
       {
-        Point.Draw();
+        for (var Y = 0; Y < Points.ColumnCount; Y++)
+        {
+          Points[X, Y].Draw();
+        }
       }
 
       // Draw Line Segments
       foreach (var Line in LineSegments)
       {
-        DrawLineEx(Line.Item1 * CellSize, Line.Item2 * CellSize, 1.0f, Color.White);
+        var x1 = Line.Item1.X * CellSize;
+        var y1 = Line.Item1.Y * CellSize;
+        var x2 = Line.Item2.X * CellSize;
+        var y2 = Line.Item2.Y * CellSize;
+        DrawLine(x1, y1, x2, y2, Color.White);
       }
 
       EndDrawing();

@@ -1,3 +1,5 @@
+using MathNet.Numerics.LinearAlgebra;
+
 namespace MarchingSquares;
 
 using System.Numerics;
@@ -5,13 +7,13 @@ using System.Numerics;
 internal static class MarchingSquares
 {
   // Run the marching squares algorithm on the given list
-  public static List<Tuple<Vector2, Vector2>> Run(PointValue[,] Points, int X1, int Y1, int X2, int Y2)
+  public static List<Tuple<Vector2, Vector2>> Run(Matrix<PointValue> Points)
   {
     var LineSegments = new List<Tuple<Vector2, Vector2>>();
 
-    for (var X = X1; X < X2 - 1; X++)
+    for (var X = 0; X < Points.RowCount - 1; X++)
     {
-      for (var Y = Y1; Y < Y2 - 1; Y++)
+      for (var Y = 0; Y < Points.ColumnCount - 1; Y++)
       {
         var A = new Vector2(X + 0.5f, Y);
         var B = new Vector2(X + 1, Y + 0.5f);

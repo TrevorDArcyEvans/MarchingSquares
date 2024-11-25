@@ -2,9 +2,9 @@ namespace MarchingSquares;
 
 using MathNet.Numerics.LinearAlgebra;
 
-public class Point
+public struct Vector2
 {
-  private readonly Vector<Single> _vector;
+  private readonly Vector<float> _vector= Vector<float>.Build.Dense(2);
 
   public int X
   {
@@ -20,10 +20,15 @@ public class Point
     set => _vector[1] = value;
   }
 
-  public Point(int x, int y)
+  public Vector2(int x, int y)
   {
-    _vector = Vector<float>.Build.Dense(2);
     X = x;
     Y = y;
+  }
+
+  public Vector2(float x, float y)
+  {
+    _vector[0] = x;
+    _vector[1] = y;
   }
 }
